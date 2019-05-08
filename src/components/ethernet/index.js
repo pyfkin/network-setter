@@ -1,23 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import IpGroups from '../ipGroup';
-import DnsGroups from '../DnsGroup';
-import './ethernet.css';
+import DnsGroups from '../dnsGroup';
 
 function Ethernet(){
     return(
-        <div>
-            <h2>Ethernet Settings</h2>
-            <IpGroups/>
-            <DnsGroups/>
+        <div className='col-6'>
+            <h6>Ethernet Settings</h6>
+            <IpGroups type='ethernet'/>
+            <DnsGroups type='ethernet'/>
         </div>
     );
 }
 
-
-
-Ethernet.propTypes = {
-
-};
 
 export default Ethernet;

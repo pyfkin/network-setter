@@ -3,19 +3,15 @@ import PropTypes from 'prop-types';
 import RadioFields from '../radioFields';
 import InputGroupDNSFields from '../inputGroupDNSFields';
 
-import {Dns} from '../../consts/groupTypes';
+import {DnsRadio} from '../../consts/groupTypes';
 
-// import './';
 
-function DnsGroups({value}){
-    let check = false;
-    if ((value) === inputDifficultyValue) {
-        check = true;
-    }
+function DnsGroups({value, type}){
     return(
-        <div className='qwsss'>
-            {Dns.map((item, index) => <RadioFields key={index} value={item}/>)}
-            <InputGroupDNSFields/>
+        <div className='col-12'>
+            {DnsRadio.map((item, index) => <RadioFields key={`${type}${index}`} index={index + 1}
+                                                        value={item} name={`${type}dns`}/>)}
+            <InputGroupDNSFields type={type}/>
         </div>
     );
 }
@@ -23,7 +19,8 @@ function DnsGroups({value}){
 
 
 DnsGroups.propTypes = {
-
+    value: PropTypes.string,
+    type: PropTypes.string,
 };
 
 export default DnsGroups;

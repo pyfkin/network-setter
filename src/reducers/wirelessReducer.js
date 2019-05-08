@@ -2,7 +2,11 @@ import update from 'immutability-helper';
 
 
 const initialState = {
-    view: '',
+    wirelessIp: '',
+    wirelessMask: '',
+    wirelessGateway: '',
+    wirelessPreferredDns: '',
+    wirelessAlternativeDns: '',
 };
 
 function wirelessReducer(state = initialState, action) {
@@ -10,6 +14,12 @@ function wirelessReducer(state = initialState, action) {
         case 'SET_DEFAULTS':
             return update(state, {
                 $merge: initialState
+            });
+        case 'ON_INPUT_WIRELESS_CHANGED':
+            return update(state, {
+                $merge: {
+                    [`${action.payload.inputName}`]: action.payload.inputValue,
+                }
             });
         default:
             return state;

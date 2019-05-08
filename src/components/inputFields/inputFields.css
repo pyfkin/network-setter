@@ -1,0 +1,11 @@
+.input-group{
+    width: 300px;
+}
+
+.form-label{
+    text-align: right;
+}
+
+span{
+    color: red;
+}

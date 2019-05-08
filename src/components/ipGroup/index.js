@@ -1,17 +1,27 @@
 import React from 'react';
+import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import RadioFields from '../radioFields';
 import InputGroupIPFields from '../inputGroupIPFields';
 
-import {Ip} from '../../consts/groupTypes';
+import {IpRadio} from '../../consts/groupTypes';
 
-// import './';
+const mapStateToProps = state => ({
 
-function IpGroups({value}){
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+
+
+function IpGroups({value, type}){
     return(
-        <div className='qwsss'>
-            {Ip.map((item, index) => <RadioFields key={index} index={index + 1} value={item}/>)}
-            <InputGroupIPFields/>
+        <div className='col-12'>
+            {IpRadio.map((item, index) => <RadioFields key={`${type}${index}`} index={index + 1}
+                                                       value={item} name={`${type}ip`}/>)}
+            <InputGroupIPFields type={type}/>
         </div>
     );
 }
@@ -19,7 +29,8 @@ function IpGroups({value}){
 
 
 IpGroups.propTypes = {
-
+    value: PropTypes.string,
+    type: PropTypes.string,
 };
 
-export default IpGroups;
+export default connect(mapStateToProps, mapDispatchToProps)(IpGroups);

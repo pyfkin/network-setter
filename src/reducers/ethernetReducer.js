@@ -2,7 +2,12 @@ import update from 'immutability-helper';
 
 
 const initialState = {
-    view: '',
+    ethernetIp: '',
+    ethernetMask: '',
+    ethernetGateway: '',
+    ethernetPreferredDns: '',
+    ethernetAlternativeDns: '',
+
 };
 
 function ethernetReducer(state = initialState, action) {
@@ -10,6 +15,12 @@ function ethernetReducer(state = initialState, action) {
         case 'SET_DEFAULTS':
             return update(state, {
                 $merge: initialState
+            });
+        case 'ON_INPUT_ETHERNET_CHANGED':
+            return update(state, {
+                $merge: {
+                    [`${action.payload.inputName}`]: action.payload.inputValue,
+                }
             });
         default:
             return state;

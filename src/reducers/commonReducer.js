@@ -2,7 +2,7 @@ import update from 'immutability-helper';
 
 
 const initialState = {
-    view: '',
+
 };
 
 function commonReducer(state = initialState, action) {

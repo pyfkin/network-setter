@@ -1,23 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import IpGroups from '../ipGroup';
-import DnsGroups from '../DnsGroup';
-import './wireless.css';
+import DnsGroups from '../dnsGroup';
 
 function Wireless(){
     return(
-        <div>
-            <h2>Wireless Settings</h2>
-            <IpGroups/>
-            <DnsGroups/>
+        <div className='col-6'>
+            <h6>Wireless Settings</h6>
+            <IpGroups type='wireless'/>
+            <DnsGroups type='wireless'/>
         </div>
     );
 }
 
-
-
-Wireless.propTypes = {
-
-};
 
 export default Wireless;
