@@ -8,6 +8,8 @@ const initialState = {
     ethernetPreferredDns: '',
     ethernetAlternativeDns: '',
 
+    ethernetIpAuto: 0,
+    ethernetDnsAuto: 0,
 };
 
 function ethernetReducer(state = initialState, action) {

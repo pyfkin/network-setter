@@ -1,18 +1,31 @@
 import React from 'react';
+import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 
 import './radioFields.css';
 
-function RadioFields({value, index, name}){
+const mapStateToProps = state => ({
+    ethernetIpAuto: state.ethernet.ethernetIpAuto,
+    ethernetDnsAuto: state.ethernet.ethernetDnsAuto,
+
+    wirelessIpAuto: state.wireless.wirelessIpAuto,
+    wirelessDnsAuto: state.wireless.wirelessDnsAuto,
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+function RadioFields({value, index, name, ...rest}){
     let check = false;
-   /* if ((value) === inputDifficultyValue) {
+    if ((index) === rest[name]) {
         check = true;
-    }*/
+    }
     return(
         <div className='form-check'>
             <label className='form-check-label' htmlFor={`${name}${index}`}>
                 <input className='form-check-input' type='radio' name={name} id={`${name}${index}`}
-                       value={value} onClick={difficultyValueChanged} defaultChecked={check}/>
+                       value={index} /*onClick={difficultyValueChanged}*/ defaultChecked={check}/>
                 {value}
                 <span className='checkmark'> </span>
             </label>
@@ -29,4 +42,4 @@ RadioFields.propTypes = {
 
 };
 
-export default RadioFields;
+export default connect(mapStateToProps, mapDispatchToProps)(RadioFields);

@@ -9,8 +9,8 @@ import {DnsRadio} from '../../consts/groupTypes';
 function DnsGroups({value, type}){
     return(
         <div className='col-12'>
-            {DnsRadio.map((item, index) => <RadioFields key={`${type}${index}`} index={index + 1}
-                                                        value={item} name={`${type}dns`}/>)}
+            {DnsRadio.map((item, index) => <RadioFields key={`${type}${index}`} index={index}
+                                                        value={item} name={`${type}DnsAuto`}/>)}
             <InputGroupDNSFields type={type}/>
         </div>
     );

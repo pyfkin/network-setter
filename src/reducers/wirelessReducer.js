@@ -7,6 +7,9 @@ const initialState = {
     wirelessGateway: '',
     wirelessPreferredDns: '',
     wirelessAlternativeDns: '',
+
+    wirelessIpAuto: 0,
+    wirelessDnsAuto: 0,
 };
 
 function wirelessReducer(state = initialState, action) {
