@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import InputFields from '../inputFields';
+import TextInputWithLabel from '../textFields';
 
 
 const mapStateToProps = state => ({
@@ -41,15 +41,14 @@ function InputGroupDNSFields({type, isDisabled, onInputEthernetDnsChanged, onInp
         }
     };
 
-    console.log(isDisabled);
     let visible = isDisabled ? '' : 'disabled';
 
     return(
         <div className={`row justify-content-end manual-input-group ${visible}`}>
-            <InputFields labelText='Preferred DNS server:' mandatory={true} name={`${type}PreferredDns`}
-                         onChange={_onInputChanged.bind(null,`${type}`, `${type}PreferredDns`)}/>
-            <InputFields labelText='Alternative DNS server:' mandatory={false} name={`${type}AlternativeDns`}
-                         onChange={_onInputChanged.bind(null, `${type}`, `${type}AlternativeDns`)}/>
+            <TextInputWithLabel labelText='Preferred DNS server:' mandatory={true} name={`${type}PreferredDns`}
+                                onChange={_onInputChanged.bind(null,`${type}`, `${type}PreferredDns`)}/>
+            <TextInputWithLabel labelText='Alternative DNS server:' mandatory={false} name={`${type}AlternativeDns`}
+                                onChange={_onInputChanged.bind(null, `${type}`, `${type}AlternativeDns`)}/>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './inputFields.css';
 
 
-function InputFields({labelText, mandatory, onChange, name, ...rest}){
+function TextFields({labelText, mandatory, onChange, name, ...rest}){
     let _mandatory = mandatory ? '*' : '';
     return(
         <div className='input-group col-12'>
@@ -16,11 +16,12 @@ function InputFields({labelText, mandatory, onChange, name, ...rest}){
 
 
 
-InputFields.propTypes = {
+TextFields.propTypes = {
     labelText: PropTypes.string,
     mandatory: PropTypes.bool,
     inputValue: PropTypes.string,
-    onInputChanged: PropTypes.func,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
 };
 
-export default memo(InputFields);
+export default memo(TextFields);

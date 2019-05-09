@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import InputFields from '../inputFields';
+import TextInputWithLabel from '../textFields';
 
 
 const mapStateToProps = state => ({
@@ -41,18 +41,16 @@ function InputGroupIPFields({type, isDisabled, onInputEthernetIpChanged, onInput
         }
     };
 
-    console.log(isDisabled, type);
-
     let visible = isDisabled ? '' : 'disabled';
 
     return(
         <div className={`row justify-content-end manual-input-group ${visible}`}>
-            <InputFields labelText='IP address:' mandatory={true} name={`${type}Ip`}
-                         onChange={_onInputChanged.bind(null, `${type}`, `${type}Ip`)}/>
-            <InputFields labelText='Subnet Mask:' mandatory={true} name={`${type}Mask`}
-                         onChange={_onInputChanged.bind(null,`${type}`, `${type}Mask`)}/>
-            <InputFields labelText='Default Gateway:' mandatory={false} name={`${type}Gateway`}
-                         onChange={_onInputChanged.bind(null,`${type}`, `${type}Gateway`)}/>
+            <TextInputWithLabel labelText='IP address:' mandatory={true} name={`${type}Ip`}
+                                onChange={_onInputChanged.bind(null, `${type}`, `${type}Ip`)}/>
+            <TextInputWithLabel labelText='Subnet Mask:' mandatory={true} name={`${type}Mask`}
+                                onChange={_onInputChanged.bind(null,`${type}`, `${type}Mask`)}/>
+            <TextInputWithLabel labelText='Default Gateway:' mandatory={false} name={`${type}Gateway`}
+                                onChange={_onInputChanged.bind(null,`${type}`, `${type}Gateway`)}/>
         </div>
     );
 }

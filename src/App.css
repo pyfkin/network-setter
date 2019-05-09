@@ -2,5 +2,69 @@
     pointer-events: none;
 
     /* for "disabled" effect */
-    opacity: 0.5;
+    opacity: .5;
+}
+
+.input-group{
+    width: 300px;
+}
+
+.form-label{
+    text-align: right;
+}
+
+span{
+    color: red;
+}
+
+
+
+
+.checkBox-input-group {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.checkBox-input-group input {
+    padding: 0;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.checkBox-input-group label {
+    position: relative;
+    cursor: pointer;
+}
+
+.checkBox-input-group label:before {
+    content:'';
+    -webkit-appearance: none;
+    border: 1px solid #858585;
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.checkBox-input-group input:checked + label:before {
+    background-color: #2196F3;
+    border: 1px solid #2196F3;
+}
+
+.checkBox-input-group input:checked + label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
