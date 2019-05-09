@@ -24,6 +24,18 @@ function ethernetReducer(state = initialState, action) {
                     [`${action.payload.inputName}`]: action.payload.inputValue,
                 }
             });
+        case 'ETHERNET_IP_RADIO_VALUE_CHANGED':
+            return update(state, {
+                $merge: {
+                    ethernetIpAuto: action.payload,
+                }
+            });
+        case 'ETHERNET_DNS_RADIO_VALUE_CHANGED':
+            return update(state, {
+                $merge: {
+                    ethernetDnsAuto: action.payload,
+                }
+            });
         default:
             return state;
     }

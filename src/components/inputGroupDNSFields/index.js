@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-function InputGroupDNSFields({type, onInputEthernetDnsChanged, onInputWirelessDnsChanged}){
+function InputGroupDNSFields({type, isDisabled, onInputEthernetDnsChanged, onInputWirelessDnsChanged}){
 
     const _onInputChanged = (type, inputName, e) => {
         if (type === 'ethernet') {
@@ -41,8 +41,11 @@ function InputGroupDNSFields({type, onInputEthernetDnsChanged, onInputWirelessDn
         }
     };
 
+    console.log(isDisabled);
+    let visible = isDisabled ? '' : 'disabled';
+
     return(
-        <div className='row justify-content-end'>
+        <div className={`row justify-content-end manual-input-group ${visible}`}>
             <InputFields labelText='Preferred DNS server:' mandatory={true} name={`${type}PreferredDns`}
                          onChange={_onInputChanged.bind(null,`${type}`, `${type}PreferredDns`)}/>
             <InputFields labelText='Alternative DNS server:' mandatory={false} name={`${type}AlternativeDns`}

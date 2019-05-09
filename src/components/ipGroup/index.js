@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import RadioFields from '../radioFields';
 import InputGroupIPFields from '../inputGroupIPFields';
@@ -6,16 +7,36 @@ import InputGroupIPFields from '../inputGroupIPFields';
 import {IpRadio} from '../../consts/groupTypes';
 
 
-function IpGroups({value, type}){
-    return(
+const mapStateToProps = state => ({
+    ethernetIpAuto: state.ethernet.ethernetIpAuto,
+
+    wirelessIpAuto: state.wireless.wirelessIpAuto,
+});
+
+
+function IpGroups({value, type, ethernetIpAuto, wirelessIpAuto})
+{
+    let isDisabled = true;
+
+    switch (type) {
+        case 'ethernet':
+            isDisabled = !!ethernetIpAuto;
+            break;
+        case 'wireless':
+            isDisabled = !!wirelessIpAuto;
+            break;
+        default:
+            break;
+    }
+
+    return (
         <div className='col-12'>
             {IpRadio.map((item, index) => <RadioFields key={`${type}${index}`} index={index}
                                                        value={item} name={`${type}IpAuto`}/>)}
-            <InputGroupIPFields type={type}/>
+            <InputGroupIPFields type={type} isDisabled={isDisabled}/>
         </div>
     );
 }
-
 
 
 IpGroups.propTypes = {
@@ -23,4 +44,4 @@ IpGroups.propTypes = {
     type: PropTypes.string,
 };
 
-export default IpGroups;
+export default connect(mapStateToProps)(IpGroups);

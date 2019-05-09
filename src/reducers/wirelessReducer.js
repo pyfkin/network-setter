@@ -24,6 +24,18 @@ function wirelessReducer(state = initialState, action) {
                     [`${action.payload.inputName}`]: action.payload.inputValue,
                 }
             });
+        case 'WIRELESS_IP_RADIO_VALUE_CHANGED':
+            return update(state, {
+                $merge: {
+                    wirelessIpAuto: action.payload,
+                }
+            });
+        case 'WIRELESS_DNS_RADIO_VALUE_CHANGED':
+            return update(state, {
+                $merge: {
+                    wirelessDnsAuto: action.payload,
+                }
+            });
         default:
             return state;
     }
