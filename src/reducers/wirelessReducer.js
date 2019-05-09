@@ -12,6 +12,9 @@ const initialState = {
     wirelessDnsAuto: 0,
 
     securityKey: '',
+
+    enabledWifi: false,
+    enabledSecurityKey: false,
 };
 
 function wirelessReducer(state = initialState, action) {
@@ -42,6 +45,18 @@ function wirelessReducer(state = initialState, action) {
             return update(state, {
                 $merge: {
                     securityKey: action.payload,
+                }
+            });
+        case 'ON_ENABLED_WIFI_CHANGED':
+            return update(state, {
+                $merge: {
+                    enabledWifi: !state.enabledWifi,
+                }
+            });
+        case 'ON_ENABLED_SECURITY_KEY_CHANGED':
+            return update(state, {
+                $merge: {
+                    enabledSecurityKey: !state.enabledSecurityKey,
                 }
             });
         default:

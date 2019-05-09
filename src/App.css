@@ -1,6 +1,7 @@
+.wirelessPage.disabled,
+.secKey.disabled,
 .manual-input-group.disabled{
     pointer-events: none;
-
     /* for "disabled" effect */
     opacity: .5;
 }

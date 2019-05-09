@@ -15,7 +15,6 @@ function TextFields({labelText, mandatory, onChange, name, ...rest}){
 }
 
 
-
 TextFields.propTypes = {
     labelText: PropTypes.string,
     mandatory: PropTypes.bool,

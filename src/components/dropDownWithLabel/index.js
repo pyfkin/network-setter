@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './dropDown.css';
+import mock from '../../db/mock';
 import Icon from './svg-icon';
 
 
@@ -12,6 +13,7 @@ class DropDownWithLabel extends React.Component
 
         this.state = {
             displayMenu: false,
+            selectedItem: '',
         };
 
         this.showDropdownMenu = this.showDropdownMenu.bind(this);
@@ -37,9 +39,21 @@ class DropDownWithLabel extends React.Component
 
     }
 
+    selectItem = (item) =>
+    {
+        this.setState({
+            selectedItem: item,
+        })
+    };
+
     render()
     {
         let _mandatory = this.props.mandatory ? '*' : '';
+
+        let body = mock.map((item, index) =>
+            <li key={index} onClick={() => this.selectItem(item)}>{item.name}</li>
+        ).filter((i) => i.favorite !== true).sort((a, b) => b.strength - a.strength);
+
         return (
             <div className='row'>
                 <label className='col-6 form-label'>{this.props.labelText}<span> {_mandatory}</span></label>
@@ -48,15 +62,10 @@ class DropDownWithLabel extends React.Component
                         <div className='dropdown col-10'>
                             <div className='button ' onClick={this.showDropdownMenu}>Please select</div>
 
-                            {this.state.displayMenu ? (
-                                    <ul>
-                                        <li><a className='active' href='#Create Page'>Create Page</a></li>
-                                        <li><a className='active' href='#Create Page'>Create Page</a></li>
-                                    </ul>
-                                ) :
-                                (
-                                    null
-                                )
+                            {this.state.displayMenu &&
+                            <ul>
+                                {body}
+                            </ul>
                             }
 
                         </div>

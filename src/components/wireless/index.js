@@ -9,6 +9,8 @@ import DnsGroups from '../dnsGroup';
 
 const mapStateToProps = state => ({
     securityKey: state.wireless.securityKey,
+    enabledWifi: state.wireless.enabledWifi,
+    enabledSecurityKey: state.wireless.enabledSecurityKey,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -16,27 +18,39 @@ const mapDispatchToProps = dispatch => ({
         type: 'ON_SECURITY_KEY_CHANGED',
         payload: e.target.value,
     }),
+    onEnabledWifiChanged: () => dispatch({
+        type: 'ON_ENABLED_WIFI_CHANGED',
+    }),
+    onEnabledSecKeyChanged: () => dispatch({
+        type: 'ON_ENABLED_SECURITY_KEY_CHANGED',
+    }),
 });
 
 
-function Wireless({onSecKeyChanged})
+function Wireless({enabledWifi, enabledSecurityKey, onSecKeyChanged, onEnabledWifiChanged, onEnabledSecKeyChanged})
 {
-
+    let visiblePage = enabledWifi ? '' : 'disabled';
+    let visibleSecKey = enabledSecurityKey ? '' : 'disabled';
     return (
         <div className='col-6'>
             <h6>Wireless Settings</h6>
+            <CheckBoxInputWithLabel name='wireless-main' labelText='Enable wifi:'
+                                    onChange={onEnabledWifiChanged}/>
+            <div className={`wirelessPage ${visiblePage}`}>
+                <div className='col-12 justify-content-end'>
+                    <DropDownWithLabel labelText='Wireless Network Name' mandatory={true}/>
+                </div>
 
-            <CheckBoxInputWithLabel labelText='Enable wifi:'/>
-            <div className='col-12 justify-content-end'>
-                <DropDownWithLabel labelText='Wireless Network Name' mandatory={true}/>
+                <CheckBoxInputWithLabel name='wireless-security' labelText='Enable wireless security:'
+                                        onChange={onEnabledSecKeyChanged}/>
+                <div className={`row justify-content-end secKey ${visibleSecKey}`}>
+                    <TextInputWithLabel labelText='Security Key:' mandatory={true} name='securityKey'
+                                        onChange={onSecKeyChanged}/>
+                </div>
+
+                <IpGroups type='wireless'/>
+                <DnsGroups type='wireless'/>
             </div>
-            <CheckBoxInputWithLabel labelText='Enable wireless security:'/>
-            <div className='row justify-content-end'>
-                <TextInputWithLabel labelText='Security Key:' mandatory={true} name='securityKey'
-                                    onChange={onSecKeyChanged}/>
-            </div>
-            <IpGroups type='wireless'/>
-            <DnsGroups type='wireless'/>
         </div>
     );
 }

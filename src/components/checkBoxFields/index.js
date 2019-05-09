@@ -2,16 +2,12 @@ import React  from 'react';
 import PropTypes from 'prop-types';
 
 
-function CheckBoxFields({labelText, onChange, name}){
+function CheckBoxFields({labelText, name, onChange}){
     return(
-       /* <div className='input-group col-12'>
-            <label className='col-6 form-label'>{labelText}<span> {_mandatory}</span></label>
-            <input type='radio' className='col-6 form-control form-input'
-                   onChange={onChange} value={rest[name]}/>*/
 
-       <div className="checkBox-input-group col-12">
-            <input type="checkbox" id="html"/>
-                <label htmlFor="html">{labelText}</label>
+       <div className='checkBox-input-group col-12'>
+            <input type='checkbox' id={name} onChange={onChange}/>
+                <label htmlFor={name}>{labelText}</label>
         </div>
 
     );
@@ -20,7 +16,7 @@ function CheckBoxFields({labelText, onChange, name}){
 
 CheckBoxFields.propTypes = {
     labelText: PropTypes.string,
-    inputValue: PropTypes.string,
+    name: PropTypes.string,
     onInputChanged: PropTypes.func,
 };
 
