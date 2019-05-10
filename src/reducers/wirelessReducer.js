@@ -15,6 +15,9 @@ const initialState = {
 
     enabledWifi: false,
     enabledSecurityKey: false,
+
+    displayMenu: false,
+    selectedItem: {},
 };
 
 function wirelessReducer(state = initialState, action) {
@@ -57,6 +60,18 @@ function wirelessReducer(state = initialState, action) {
             return update(state, {
                 $merge: {
                     enabledSecurityKey: !state.enabledSecurityKey,
+                }
+            });
+        case 'ON_SELECT_ITEM':
+            return update(state, {
+                $merge: {
+                    selectedItem: action.payload,
+                }
+            });
+        case 'ON_SHOW_HIDE_MENU':
+            return update(state, {
+                $merge: {
+                    displayMenu: !state.displayMenu,
                 }
             });
         default:

@@ -1,13 +1,13 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 
-function CheckBoxFields({labelText, name, onChange}){
-    return(
+function CheckBoxFields({labelText, name, onChange}) {
+    return (
 
-       <div className='checkBox-input-group col-12'>
+        <div className='checkBox-input-group col-12'>
             <input type='checkbox' id={name} onChange={onChange}/>
-                <label htmlFor={name}>{labelText}</label>
+            <label htmlFor={name}>{labelText}</label>
         </div>
 
     );

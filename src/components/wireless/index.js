@@ -32,7 +32,7 @@ function Wireless({enabledWifi, enabledSecurityKey, onSecKeyChanged, onEnabledWi
     let visiblePage = enabledWifi ? '' : 'disabled';
     let visibleSecKey = enabledSecurityKey ? '' : 'disabled';
     return (
-        <div className='col-6'>
+        <div className='col-6 wireless'>
             <h6>Wireless Settings</h6>
             <CheckBoxInputWithLabel name='wireless-main' labelText='Enable wifi:'
                                     onChange={onEnabledWifiChanged}/>

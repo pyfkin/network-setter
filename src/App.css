@@ -1,3 +1,33 @@
+.main{
+    padding-top: 15px;
+}
+
+.ethernet,
+.wireless,
+.footer{
+    padding-top: 15px;
+    border: 1px solid black;
+}
+
+.wireless{
+    border-left: none;
+}
+
+.footer{
+    border-top: none;
+    padding-bottom: 15px;
+}
+
+.btn-user{
+    border-radius: 100px;
+    width: 120px;
+    margin-left: 10px;
+}
+
+.save{
+    background-color: #2196F3;
+}
+
 .wirelessPage.disabled,
 .secKey.disabled,
 .manual-input-group.disabled{
