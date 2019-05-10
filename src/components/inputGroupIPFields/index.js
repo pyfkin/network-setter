@@ -31,7 +31,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-function InputGroupIPFields({type, isDisabled, onInputEthernetIpChanged, onInputWirelessIpChanged}){
+function InputGroupIPFields({ethernetIp, ethernetMask, ethernetGateway, wirelessIp, wirelessMask, wirelessGateway,
+                                type, isDisabled, onInputEthernetIpChanged, onInputWirelessIpChanged}){
 
     const _onInputChanged = (type, inputName, e) => {
         if (type === 'ethernet') {
@@ -41,15 +42,26 @@ function InputGroupIPFields({type, isDisabled, onInputEthernetIpChanged, onInput
         }
     };
 
+    let _ip, _mask, _gateway;
+    if (type === 'ethernet') {
+        _ip = ethernetIp;
+        _mask = ethernetMask;
+        _gateway = ethernetGateway;
+    } else {
+        _ip = wirelessIp;
+        _mask = wirelessMask;
+        _gateway = wirelessGateway;
+    }
+
     let visible = isDisabled ? '' : 'disabled';
 
     return(
         <div className={`row justify-content-end manual-input-group ${visible}`}>
-            <TextInputWithLabel labelText='IP address:' mandatory={true} name={`${type}Ip`}
+            <TextInputWithLabel labelText='IP address:' mandatory={true} name={`${type}Ip`} value={_ip}
                                 onChange={_onInputChanged.bind(null, `${type}`, `${type}Ip`)}/>
-            <TextInputWithLabel labelText='Subnet Mask:' mandatory={true} name={`${type}Mask`}
+            <TextInputWithLabel labelText='Subnet Mask:' mandatory={true} name={`${type}Mask`} value={_mask}
                                 onChange={_onInputChanged.bind(null,`${type}`, `${type}Mask`)}/>
-            <TextInputWithLabel labelText='Default Gateway:' mandatory={false} name={`${type}Gateway`}
+            <TextInputWithLabel labelText='Default Gateway:' mandatory={false} name={`${type}Gateway`} value={_gateway}
                                 onChange={_onInputChanged.bind(null,`${type}`, `${type}Gateway`)}/>
         </div>
     );

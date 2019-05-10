@@ -6,7 +6,7 @@
 .wireless,
 .footer{
     padding-top: 15px;
-    border: 1px solid black;
+    border: 1px solid #8b8b8b;
 }
 
 .wireless{
@@ -22,6 +22,7 @@
     border-radius: 100px;
     width: 120px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .save{
@@ -32,24 +33,17 @@
 .secKey.disabled,
 .manual-input-group.disabled{
     pointer-events: none;
-    /* for "disabled" effect */
     opacity: .5;
 }
 
 .input-group{
     width: 300px;
+    margin-bottom: 10px;
 }
 
 .form-label{
     text-align: right;
 }
-
-span{
-    color: red;
-}
-
-
-
 
 .checkBox-input-group {
     display: block;

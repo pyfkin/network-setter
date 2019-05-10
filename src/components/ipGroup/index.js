@@ -18,15 +18,10 @@ function IpGroups({value, type, ethernetIpAuto, wirelessIpAuto})
 {
     let isDisabled = true;
 
-    switch (type) {
-        case 'ethernet':
-            isDisabled = !!ethernetIpAuto;
-            break;
-        case 'wireless':
-            isDisabled = !!wirelessIpAuto;
-            break;
-        default:
-            break;
+    if (type === 'ethernet') {
+        isDisabled = !!ethernetIpAuto;
+    } else {
+        isDisabled = !!wirelessIpAuto;
     }
 
     return (

@@ -18,22 +18,17 @@ function DnsGroups({value, type, ethernetDnsAuto, wirelessDnsAuto}){
 
     let isDisabled = true;
 
-    switch (type) {
-        case 'ethernet':
-            isDisabled = !!ethernetDnsAuto;
-            break;
-        case 'wireless':
-            isDisabled = !!wirelessDnsAuto;
-            break;
-        default:
-            break;
+    if (type === 'ethernet') {
+        isDisabled = !!ethernetDnsAuto;
+    } else {
+        isDisabled = !!wirelessDnsAuto;
     }
 
     return(
         <div className='col-12'>
             {DnsRadio.map((item, index) => <RadioFields key={`${type}${index}`} index={index}
                                                         value={item} name={`${type}DnsAuto`}/>)}
-            <InputGroupDNSFields type={type}  isDisabled={isDisabled}/>
+            <InputGroupDNSFields type={type} isDisabled={isDisabled}/>
         </div>
     );
 }

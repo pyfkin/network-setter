@@ -31,23 +31,35 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-function InputGroupDNSFields({type, isDisabled, onInputEthernetDnsChanged, onInputWirelessDnsChanged}){
+function InputGroupDNSFields({ethernetPreferredDns, ethernetAlternativeDns, wirelessPreferredDns, wirelessAlternativeDns,
+                                 type, isDisabled, onInputEthernetDnsChanged, onInputWirelessDnsChanged}){
 
     const _onInputChanged = (type, inputName, e) => {
         if (type === 'ethernet') {
             onInputEthernetDnsChanged(inputName, e);
-        } else if (type === 'wireless') {
+        } else {
             onInputWirelessDnsChanged(inputName, e);
         }
     };
+
+    let _PreferredDns, _AlternativeDns;
+    if (type === 'ethernet') {
+        _PreferredDns = ethernetPreferredDns;
+        _AlternativeDns = ethernetAlternativeDns;
+    } else {
+        _PreferredDns = wirelessPreferredDns;
+        _AlternativeDns = wirelessAlternativeDns;
+    }
 
     let visible = isDisabled ? '' : 'disabled';
 
     return(
         <div className={`row justify-content-end manual-input-group ${visible}`}>
             <TextInputWithLabel labelText='Preferred DNS server:' mandatory={true} name={`${type}PreferredDns`}
+                                value={_PreferredDns}
                                 onChange={_onInputChanged.bind(null,`${type}`, `${type}PreferredDns`)}/>
             <TextInputWithLabel labelText='Alternative DNS server:' mandatory={false} name={`${type}AlternativeDns`}
+                                value={_AlternativeDns}
                                 onChange={_onInputChanged.bind(null, `${type}`, `${type}AlternativeDns`)}/>
         </div>
     );

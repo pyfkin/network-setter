@@ -18,9 +18,11 @@ const initialState = {
 
     displayMenu: false,
     selectedItem: {},
+    btnText: 'Please select',
 };
 
-function wirelessReducer(state = initialState, action) {
+function wirelessReducer(state = initialState, action)
+{
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
@@ -65,7 +67,8 @@ function wirelessReducer(state = initialState, action) {
         case 'ON_SELECT_ITEM':
             return update(state, {
                 $merge: {
-                    selectedItem: action.payload,
+                    selectedItem: action.payload.item,
+                    btnText: action.payload.btnNewText,
                 }
             });
         case 'ON_SHOW_HIDE_MENU':

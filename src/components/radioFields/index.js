@@ -65,7 +65,8 @@ function RadioFields({value, index, name,
         <div className='form-check'>
             <label className='form-check-label' htmlFor={`${name}${index}`}>
                 <input className='form-check-input' type='radio' name={name} id={`${name}${index}`}
-                       value={index} onClick={_autoTypeValueChanged.bind(null, name)} defaultChecked={check}/>
+                       value={index} onChange={_autoTypeValueChanged.bind(null, name)}
+                       checked={check} />
                 {value}
                 <span className='checkmark'> </span>
             </label>

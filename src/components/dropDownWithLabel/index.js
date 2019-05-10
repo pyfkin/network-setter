@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './dropDown.css';
 import mock from '../../db/mock';
 import Icon from './svg-icon';
 import connect from "react-redux/es/connect/connect";
+import './dropDown.css';
 
 
 const mapStateToProps = state => ({
+    btnText: state.wireless.btnText,
     displayMenu: state.wireless.displayMenu,
     selectedItem: state.wireless.selectedItem,
 });
@@ -19,14 +20,17 @@ const mapDispatchToProps = dispatch => ({
     onShowHideDropdownMenu: () => dispatch({
         type: 'ON_SHOW_HIDE_MENU',
     }),
-    onSelectItem: (itemName) => dispatch({
+    onSelectItem: (item) => dispatch({
         type: 'ON_SELECT_ITEM',
-        payload: itemName,
+        payload: {
+            item,
+            btnNewText: item.name,
+        },
     })
 });
 
 
-function DropDownWithLabel({mandatory, labelText, displayMenu, onShowHideDropdownMenu, onSelectItem}) {
+function DropDownWithLabel({mandatory, labelText, displayMenu, btnText, onShowHideDropdownMenu, onSelectItem}) {
 
     const _selectItem = (item) => {
         onSelectItem(item);
@@ -51,19 +55,18 @@ function DropDownWithLabel({mandatory, labelText, displayMenu, onShowHideDropdow
         <div className='row'>
             <label className='col-6 form-label'>{labelText}<span> {_mandatory}</span></label>
             <div className='col-6'>
-                <div className='row'>
-                    <div className='dropdown col-10'>
-                        <div className='button ' onClick={onShowHideDropdownMenu}>Please select</div>
+                <div className='row cover-dropdown'>
+                    <div className='dropdown col-9'>
+                        <div className='button' onClick={onShowHideDropdownMenu}>{btnText}</div>
 
                         {displayMenu &&
                         <ul>
                             {body}
                         </ul>
                         }
-
                     </div>
-                    <div className='col-2'>
-                        <Icon color='red'/>
+                    <div className='col-2 user-icon'>
+                        <Icon color='red' onClick={() => console.log('fdsgfewrr')}/>
                     </div>
                 </div>
             </div>

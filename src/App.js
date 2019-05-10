@@ -7,13 +7,13 @@ import './App.css';
 
 function App() {
   return (
-    <div className='container'>
+    <form className='container'>
         <div className='row main'>
             <Ethernet />
             <Wireless />
         </div>
         <ButtonSet/>
-    </div>
+    </form>
   );
 }
 

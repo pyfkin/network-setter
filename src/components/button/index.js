@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Button({text, btnStyle, onClick}) {
+function Button({text, btnStyle, onClick, usetType}) {
 
     return (
-        <button className={`btn btn-user ${btnStyle}`} onClick={onClick}>{text}</button>
+        <input type={usetType} className={`btn btn-user ${btnStyle}`} onClick={onClick} value={text} readOnly={true}/>
     );
 }
 

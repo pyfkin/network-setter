@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import './inputFields.css';
 
 
-function TextFields({labelText, mandatory, onChange, name, ...rest}){
+function TextFields({labelText, mandatory, onChange, name, value}){
     let _mandatory = mandatory ? '*' : '';
     return(
         <div className='input-group col-12'>
             <label className='col-6 form-label'>{labelText}<span> {_mandatory}</span></label>
             <input type='text' className='col-6 form-control form-input'
-                   onChange={onChange} value={rest[name]}/>
+                   onChange={onChange}  value={value}/>
         </div>
     );
 }

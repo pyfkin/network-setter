@@ -1,41 +1,23 @@
 .dropdown {
     position: relative;
-    display: inline-block;
-    width: 200px;
-    height: 40px;
-}
-
-.triangle_up {
-    content: "";
-    position: relative;
-    top: 41px;
-    left: 150px;
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-right: 0.2em solid black;
-    border-top: 0.2em solid black;
-    transform: rotate(-45deg);
-    margin-right: 0.5em;
-    margin-left: 1.0em;
+    height: 35px;
+    border: 1px solid red;
+    cursor: pointer;
 }
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    top:45px;
-    right: 0;
-    width: 200px;
+    top: 25px;
+    right: -1px;
+    width: 100%;
     background-color: white;
     border: 1px solid red;
+    border-top: none;
     position: absolute;
+    box-sizing: content-box;
     z-index: 1;
-}
-
-li a {
-    color: #000;
-    text-decoration: none;
 }
 
 li {
@@ -51,26 +33,24 @@ li:hover {
     color: white;
 }
 
-.button{
-    width:178px;
-    height:18px;
-    border-radius:5px;
-    color: #7c7c7c;
-}
-
 .button:before{
     content: "";
+    float: right;
     position: relative;
-    top: 7px;
-    left: 150px;
+    top: 12px;
+    right: 10px;
     display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-right: 0.2em solid black;
-    border-top: 0.2em solid black;
+    width: 11px;
+    height: 11px;
+    border-right: 0.1em solid #7d7d7d;
+    border-top: 0.1em solid #7d7d7d;
     transform: rotate(-45deg);
-    margin-right: 0.5em;
-    margin-left: 1.0em;
+    /*transform: rotate(-225deg);*/
+    margin-right: -15px;
+}
+
+ul .button:before{
+    /*background-color: #red;*/
 }
 
 .svg-border{
@@ -80,3 +60,6 @@ li:hover {
     border: 1px solid #2196F3;
 }
 
+.user-icon{
+    padding-top: 5px;
+}
