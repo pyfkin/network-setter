@@ -42,14 +42,14 @@ function Wireless({
                       wirelessAlternativeDns, wirelessIpAuto, wirelessDnsAuto, securityKey,
                       securityKeyRequired, onSecKeyChanged, onEnabledWifiChanged, onEnabledSecKeyChanged
                   }) {
-    let visiblePage = enabledWifi ? '' : 'disabled';
-    let visibleSecKey = enabledSecurityKey ? '' : 'disabled';
+    let _visiblePage = enabledWifi ? '' : 'disabled';
+    let _visibleSecKey = enabledSecurityKey ? '' : 'disabled';
     return (
         <div className='col-6 wireless'>
             <h6>Wireless Settings</h6>
             <CheckBoxInputWithLabel name='wireless-main' labelText='Enable wifi:' value={enabledWifi}
                                     onChange={onEnabledWifiChanged}/>
-            <div className={`wirelessPage ${visiblePage}`}>
+            <div className={`wirelessPage ${_visiblePage}`}>
                 <div className='col-12 justify-content-end'>
                     <DropDownWithLabel labelText='Wireless Network Name' mandatory={true}/>
                 </div>
@@ -58,7 +58,7 @@ function Wireless({
                                         value={enabledSecurityKey}
                                         onChange={onEnabledSecKeyChanged}/>
                 <div className='col-12'>
-                    <div className={`row justify-content-end secKey ${visibleSecKey}`}>
+                    <div className={`row justify-content-end secKey ${_visibleSecKey}`}>
                         <TextInputWithLabel labelText='Security Key:' mandatory={true} name='securityKey'
                                             isRequired={securityKeyRequired} value={securityKey} onChange={onSecKeyChanged}/>
                     </div>

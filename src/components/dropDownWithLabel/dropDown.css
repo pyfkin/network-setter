@@ -21,7 +21,7 @@ ul {
 }
 
 li {
-    padding-left: 5px;
+    padding-left: 10px;
 }
 
 li:hover {
@@ -33,7 +33,7 @@ li:hover {
     content: "";
     float: right;
     position: relative;
-    top: 12px;
+    top: 8px;
     right: 10px;
     display: inline-block;
     width: 11px;
@@ -41,12 +41,18 @@ li:hover {
     border-right: 0.1em solid #7d7d7d;
     border-top: 0.1em solid #7d7d7d;
     transform: rotate(-45deg);
-    /*transform: rotate(-225deg);*/
     margin-right: -15px;
 }
 
 .button{
+    font-size: 14px;
     padding-top: 5px;
+}
+
+.down.button:before{
+    content: "";
+    top: 2px;
+    transform: rotate(-225deg);
 }
 
 .svg-border{
@@ -57,5 +63,42 @@ li:hover {
 }
 
 .user-icon{
-    padding-top: 5px;
+    padding: 0;
+    margin: auto;
+    padding-top: 1px;
+}
+
+.user-icon:hover{
+    cursor: pointer;
+}
+
+.rotate-in-center {
+    padding-top: 0;
+    -webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes rotate-in-center {
+    0% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        opacity: 1;
+    }
+}
+@keyframes rotate-in-center {
+    0% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        opacity: 1;
+    }
 }

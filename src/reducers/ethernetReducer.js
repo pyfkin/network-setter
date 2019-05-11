@@ -40,7 +40,6 @@ function ethernetReducer(state = initialState, action) {
                 }
             });
         case 'REQUIRED_ETHERNET_CHANGED':
-            let _required;
             if (action.payload.key === 'Ip') {
                 return update(state, {
                     $merge: {

@@ -1,19 +1,28 @@
-import mandatory from '../consts/mandatory';
-
-
 class CheckData
 {
-    isValid(rest){
-        console.log(rest);
-        // let ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        // if(inputText.value.match(ipformat))
 
+    setData(rest){
+        let obj = {
+            btnText: rest['btnText'],
+            selectedItem: rest['selectedItem'],
+            ethernetIp: rest['ethernetIp'],
+            ethernetMask: rest['ethernetMask'],
+            ethernetGateway: rest['ethernetGateway'],
+            wirelessIp: rest['wirelessIp'],
+            wirelessMask: rest['wirelessMask'],
+            wirelessGateway: rest['wirelessGateway'],
+            ethernetIpAuto: rest['ethernetIpAuto'],
+            ethernetDnsAuto:rest['.ethernetDnsAuto'],
+            wirelessIpAuto: rest['wirelessIpAuto'],
+            wirelessDnsAuto: rest['wirelessDnsAuto'],
+            ethernetPreferredDns: rest['ethernetPreferredDns'],
+            wirelessPreferredDns: rest['wirelessPreferredDns'],
+            securityKey: rest['securityKey'],
+            enabledWifi: rest['enabledWifi'],
+            enabledSecurityKey: rest['enabledSecurityKey'],
+        };
 
-
-        return true;
-    }
-
-    setData(obj){
+        console.log(obj);
         let serialObj = JSON.stringify(obj);
         localStorage.setItem("userSettings", serialObj);
     }

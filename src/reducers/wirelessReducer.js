@@ -87,7 +87,6 @@ function wirelessReducer(state = initialState, action) {
                 }
             });
         case 'REQUIRED_WIRELESS_CHANGED':
-            let _required;
             if (action.payload.key === 'Ip') {
                 return update(state, {
                     $merge: {

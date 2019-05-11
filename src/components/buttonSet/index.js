@@ -1,35 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Button from '../button';
-import dataService from '../../services/dataService';
 
 
-const mapStateToProps = state => ({
-
-    btnText: state.wireless.btnText,
-    selectedItem: state.wireless.selectedItem,
-
-    ethernetIp: state.ethernet.ethernetIp,
-    ethernetMask: state.ethernet.ethernetMask,
-    ethernetGateway: state.ethernet.ethernetGateway,
-
-    wirelessIp: state.wireless.wirelessIp,
-    wirelessMask: state.wireless.wirelessMask,
-    wirelessGateway: state.wireless.wirelessGateway,
-
-    ethernetIpAuto: state.ethernet.ethernetIpAuto,
-    ethernetDnsAuto: state.ethernet.ethernetDnsAuto,
-
-    wirelessIpAuto: state.wireless.wirelessIpAuto,
-    wirelessDnsAuto: state.wireless.wirelessDnsAuto,
-
-    ethernetPreferredDns: state.ethernet.ethernetPreferredDns,
-    wirelessPreferredDns: state.wireless.wirelessPreferredDns,
-
-    securityKey: state.wireless.securityKey,
-    enabledWifi: state.wireless.enabledWifi,
-    enabledSecurityKey: state.wireless.enabledSecurityKey,
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
     onSaveData: () => dispatch({
@@ -45,28 +19,16 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-function ButtonSet({text, btnStyle, onSaveData, onCancel, onReload, ...rest}) {
-    const _save = (e) => {
-        //e.preventDefault();
-        console.log(rest);
-        if (dataService.isValid(rest)) {
+function ButtonSet({text, btnStyle, onSaveData, onCancel, onReload}) {
 
-            dataService.setData({
-                    item1: 1,
-                    item2: [123, "two", 3.0],
-                    item3:"hello"
-                });
-        }
-    };
-
-    function _cancel()  {
+    const _cancel = () => {
         onCancel();
         onReload();
-    }
+    };
 
     return (
         <div className='row footer'>
-            <Button text='Save' userType='submit' btnStyle='btn-primary save' onСlick={_save}/>
+            <Button text='Save' userType='submit' btnStyle='btn-primary save'/>
             <Button text='Cancel' userType='button' btnStyle='btn-outline-primary' onClick={_cancel}/>
         </div>
     );

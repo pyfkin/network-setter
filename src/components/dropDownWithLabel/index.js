@@ -11,6 +11,9 @@ const mapStateToProps = state => ({
     wifiNameRequired: state.wireless.wifiNameRequired,
     displayMenu: state.wireless.displayMenu,
     selectedItem: state.wireless.selectedItem,
+
+    dropStyle: state.common.dropStyle,
+    rotateStyle: state.common.rotateStyle,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -23,16 +26,43 @@ const mapDispatchToProps = dispatch => ({
             item,
             btnNewText: item.name,
         },
-    })
+    }),
+    MouseEnter: () => dispatch({
+        type: 'ON_MOUSE_ENTER',
+    }),
+    MouseLeave: () => dispatch({
+        type: 'ON_MOUSE_LEAVE',
+    }),
+    RotateStart: () => dispatch({
+        type: 'ON_ROTATE',
+    }),
+    RotateStop: () => dispatch({
+        type: 'ON_ROTATE_STOP',
+    }),
 });
 
 
-function DropDownWithLabel({mandatory, labelText, displayMenu, btnText, wifiNameRequired,
-                               onShowHideDropdownMenu, onSelectItem}) {
+function DropDownWithLabel({
+                               mandatory, labelText, displayMenu, btnText, wifiNameRequired, dropStyle, rotateStyle,
+                               onShowHideDropdownMenu, onSelectItem, MouseLeave, MouseEnter, RotateStart, RotateStop
+                           }) {
+
+    let _dropStyle = dropStyle ? 'down' : 'up';
+    let _rotate = rotateStyle ? 'rotate-in-center' : '';
 
     const _selectItem = (item) => {
         onSelectItem(item);
+        MouseLeave();
         onShowHideDropdownMenu();
+    };
+
+    const _onDropStyleChange = () => {
+        dropStyle ? MouseEnter() : MouseLeave();
+    };
+
+    const _onRotate = () => {
+        RotateStart();
+        setTimeout(RotateStop, 600);
     };
 
     const _sortDevicesByFavouriteAndStrength = (a, b) => {
@@ -54,17 +84,17 @@ function DropDownWithLabel({mandatory, labelText, displayMenu, btnText, wifiName
             <label className='col-6 form-label'>{labelText}<span> {_mandatory}</span></label>
             <div className='col-6'>
                 <div className='row cover-dropdown'>
-                    <div className='dropdown col-9'>
-                        <div className='button' onClick={onShowHideDropdownMenu}>{btnText}</div>
-
-                        {displayMenu &&
-                        <ul>
-                            {body}
-                        </ul>
+                    <div className='dropdown col-9' onClick={_onDropStyleChange}>
+                        <div className={`${_dropStyle} button`} onClick={onShowHideDropdownMenu}>{btnText}</div>
+                        {
+                            displayMenu &&
+                            <ul className='wireless-list'>
+                                {body}
+                            </ul>
                         }
                     </div>
-                    <div className='col-2 user-icon svg-border'>
-                        <Icon color='red' onClick={() => console.log('fdsgfewrr')}/>
+                    <div className={`${_rotate} user-icon svg-border`}>
+                        <Icon color='red' onClick={_onRotate}/>
                     </div>
                 </div>
             </div>
