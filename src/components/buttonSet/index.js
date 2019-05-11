@@ -8,7 +8,6 @@ const mapStateToProps = state => ({
 
     btnText: state.wireless.btnText,
     selectedItem: state.wireless.selectedItem,
-    // displayMenu: state.wireless.displayMenu,
 
     ethernetIp: state.ethernet.ethernetIp,
     ethernetMask: state.ethernet.ethernetMask,
@@ -23,6 +22,9 @@ const mapStateToProps = state => ({
 
     wirelessIpAuto: state.wireless.wirelessIpAuto,
     wirelessDnsAuto: state.wireless.wirelessDnsAuto,
+
+    ethernetPreferredDns: state.ethernet.ethernetPreferredDns,
+    wirelessPreferredDns: state.wireless.wirelessPreferredDns,
 
     securityKey: state.wireless.securityKey,
     enabledWifi: state.wireless.enabledWifi,
@@ -45,7 +47,8 @@ const mapDispatchToProps = dispatch => ({
 
 function ButtonSet({text, btnStyle, onSaveData, onCancel, onReload, ...rest}) {
     const _save = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
+        console.log(rest);
         if (dataService.isValid(rest)) {
 
             dataService.setData({
@@ -63,7 +66,7 @@ function ButtonSet({text, btnStyle, onSaveData, onCancel, onReload, ...rest}) {
 
     return (
         <div className='row footer'>
-            <Button text='Save' userType='submit' btnStyle='btn-primary save' onClick={_save}/>
+            <Button text='Save' userType='submit' btnStyle='btn-primary save' onСlick={_save}/>
             <Button text='Cancel' userType='button' btnStyle='btn-outline-primary' onClick={_cancel}/>
         </div>
     );

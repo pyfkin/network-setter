@@ -3,26 +3,30 @@ import update from 'immutability-helper';
 
 const initialState = {
     wirelessIp: '',
+    wirelessIpRequired: false,
     wirelessMask: '',
+    wirelessMaskRequired: false,
     wirelessGateway: '',
     wirelessPreferredDns: '',
+    wirelessPreferredDnsRequired: false,
     wirelessAlternativeDns: '',
 
     wirelessIpAuto: 0,
     wirelessDnsAuto: 0,
 
     securityKey: '',
+    securityKeyRequired: false,
 
     enabledWifi: false,
     enabledSecurityKey: false,
 
     displayMenu: false,
-    selectedItem: {},
     btnText: 'Please select',
+    wifiNameRequired: false,
+    selectedItem: {},
 };
 
-function wirelessReducer(state = initialState, action)
-{
+function wirelessReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
@@ -56,12 +60,16 @@ function wirelessReducer(state = initialState, action)
             return update(state, {
                 $merge: {
                     enabledWifi: !state.enabledWifi,
+                    btnText: state.enabledWifi ? 'Please select' : state.btnText,
+                    selectedItem: state.enabledWifi ? {} : state.selectedItem,
+                    wifiNameRequired: state.wifiNameRequired ? !state.wifiNameRequired : false,
                 }
             });
         case 'ON_ENABLED_SECURITY_KEY_CHANGED':
             return update(state, {
                 $merge: {
                     enabledSecurityKey: !state.enabledSecurityKey,
+                    securityKeyRequired: !state.securityKeyRequired,
                 }
             });
         case 'ON_SELECT_ITEM':
@@ -69,6 +77,7 @@ function wirelessReducer(state = initialState, action)
                 $merge: {
                     selectedItem: action.payload.item,
                     btnText: action.payload.btnNewText,
+                    wifiNameRequired: false,
                 }
             });
         case 'ON_SHOW_HIDE_MENU':
@@ -77,6 +86,22 @@ function wirelessReducer(state = initialState, action)
                     displayMenu: !state.displayMenu,
                 }
             });
+        case 'REQUIRED_WIRELESS_CHANGED':
+            let _required;
+            if (action.payload.key === 'Ip') {
+                return update(state, {
+                    $merge: {
+                        wirelessIpRequired: !state.wirelessIpRequired,
+                        wirelessMaskRequired: !state.wirelessMaskRequired,
+                    }
+                })
+            } else {
+                return update(state, {
+                    $merge: {
+                        wirelessPreferredDnsRequired: !state.wirelessPreferredDnsRequired,
+                    }
+                })
+            }
         default:
             return state;
     }

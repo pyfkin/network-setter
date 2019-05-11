@@ -9,7 +9,6 @@ function CheckBoxFields({labelText, name, onChange, value}) {
             <input type='checkbox' id={name} onChange={onChange} checked={value}/>
             <label htmlFor={name}>{labelText}</label>
         </div>
-
     );
 }
 

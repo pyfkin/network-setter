@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
     wirelessPreferredDns: state.wireless.wirelessPreferredDns,
     wirelessAlternativeDns: state.wireless.wirelessAlternativeDns,
 
-
+    ethernetPreferredDnsRequired: state.ethernet.ethernetPreferredDnsRequired,
+    wirelessPreferredDnsRequired: state.wireless.wirelessPreferredDnsRequired,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,7 +33,8 @@ const mapDispatchToProps = dispatch => ({
 
 
 function InputGroupDNSFields({ethernetPreferredDns, ethernetAlternativeDns, wirelessPreferredDns, wirelessAlternativeDns,
-                                 type, isDisabled, onInputEthernetDnsChanged, onInputWirelessDnsChanged}){
+                                 type, isDisabled, onInputEthernetDnsChanged, onInputWirelessDnsChanged,
+                                 ethernetPreferredDnsRequired, wirelessPreferredDnsRequired}){
 
     const _onInputChanged = (type, inputName, e) => {
         if (type === 'ethernet') {
@@ -42,13 +44,16 @@ function InputGroupDNSFields({ethernetPreferredDns, ethernetAlternativeDns, wire
         }
     };
 
-    let _PreferredDns, _AlternativeDns;
+    let _PreferredDns, _AlternativeDns,
+        _requiredPreferredDns;
     if (type === 'ethernet') {
         _PreferredDns = ethernetPreferredDns;
         _AlternativeDns = ethernetAlternativeDns;
+        _requiredPreferredDns = ethernetPreferredDnsRequired;
     } else {
         _PreferredDns = wirelessPreferredDns;
         _AlternativeDns = wirelessAlternativeDns;
+        _requiredPreferredDns = wirelessPreferredDnsRequired;
     }
 
     let visible = isDisabled ? '' : 'disabled';
@@ -56,10 +61,10 @@ function InputGroupDNSFields({ethernetPreferredDns, ethernetAlternativeDns, wire
     return(
         <div className={`row justify-content-end manual-input-group ${visible}`}>
             <TextInputWithLabel labelText='Preferred DNS server:' mandatory={true} name={`${type}PreferredDns`}
-                                value={_PreferredDns}
+                                isRequired={_requiredPreferredDns} value={_PreferredDns}
                                 onChange={_onInputChanged.bind(null,`${type}`, `${type}PreferredDns`)}/>
             <TextInputWithLabel labelText='Alternative DNS server:' mandatory={false} name={`${type}AlternativeDns`}
-                                value={_AlternativeDns}
+                                isRequired={false} value={_AlternativeDns}
                                 onChange={_onInputChanged.bind(null, `${type}`, `${type}AlternativeDns`)}/>
         </div>
     );

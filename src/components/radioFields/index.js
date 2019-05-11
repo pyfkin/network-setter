@@ -29,10 +29,22 @@ const mapDispatchToProps = dispatch => ({
         type: 'WIRELESS_DNS_RADIO_VALUE_CHANGED',
         payload: index,
     }),
-
+    requiredEthernetChanged: (_key) => dispatch({
+        type: 'REQUIRED_ETHERNET_CHANGED',
+        payload: {
+            key: _key
+        }
+    }),
+    requiredWirelessChanged: (_key) => dispatch({
+        type: 'REQUIRED_WIRELESS_CHANGED',
+        payload: {
+            key: _key
+        }
+    })
 });
 
 function RadioFields({value, index, name,
+                         requiredEthernetChanged, requiredWirelessChanged,
                          ethernetIpAutoValueChanged, ethernetDnsAutoValueChanged,
                          wirelessIpAutoValueChanged, wirelessDnsAutoValueChanged, ...rest})
 {
@@ -46,15 +58,19 @@ function RadioFields({value, index, name,
         switch (_name) {
             case 'ethernetIpAuto':
                 ethernetIpAutoValueChanged(index);
+                requiredEthernetChanged('Ip');
                 break;
             case 'ethernetDnsAuto':
                 ethernetDnsAutoValueChanged(index);
+                requiredEthernetChanged('Dns');
                 break;
             case 'wirelessIpAuto':
                 wirelessIpAutoValueChanged(index);
+                requiredWirelessChanged('Ip');
                 break;
             case 'wirelessDnsAuto':
                 wirelessDnsAutoValueChanged(index);
+                requiredWirelessChanged('Dns');
                 break;
             default:
                 break;

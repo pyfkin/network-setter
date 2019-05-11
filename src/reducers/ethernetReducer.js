@@ -3,9 +3,12 @@ import update from 'immutability-helper';
 
 const initialState = {
     ethernetIp: '',
+    ethernetIpRequired: false,
     ethernetMask: '',
+    ethernetMaskRequired: false,
     ethernetGateway: '',
     ethernetPreferredDns: '',
+    ethernetPreferredDnsRequired: false,
     ethernetAlternativeDns: '',
 
     ethernetIpAuto: 0,
@@ -36,6 +39,21 @@ function ethernetReducer(state = initialState, action) {
                     ethernetDnsAuto: action.payload,
                 }
             });
+        case 'REQUIRED_ETHERNET_CHANGED':
+            let _required;
+            if (action.payload.key === 'Ip') {
+                return update(state, {
+                    $merge: {
+                        ethernetIpRequired: !state.ethernetIpRequired,
+                        ethernetMaskRequired: !state.ethernetMaskRequired,
+                    }
+                })
+            } else {
+                return update(state, {
+                    $merge: {
+                        ethernetPreferredDnsRequired: !state.ethernetPreferredDnsRequired,
+                    }
+                })}
         default:
             return state;
     }

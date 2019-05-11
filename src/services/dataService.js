@@ -1,9 +1,13 @@
+import mandatory from '../consts/mandatory';
+
+
 class CheckData
 {
-    isValid(){
-        console.log('валид валид');
+    isValid(rest){
+        console.log(rest);
         // let ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         // if(inputText.value.match(ipformat))
+
 
 
         return true;

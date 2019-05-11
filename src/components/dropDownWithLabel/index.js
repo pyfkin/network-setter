@@ -8,15 +8,12 @@ import './dropDown.css';
 
 const mapStateToProps = state => ({
     btnText: state.wireless.btnText,
+    wifiNameRequired: state.wireless.wifiNameRequired,
     displayMenu: state.wireless.displayMenu,
     selectedItem: state.wireless.selectedItem,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSecKeyChanged: (e) => dispatch({
-        type: 'ON_SECURITY_KEY_CHANGED',
-        payload: e.target.value,
-    }),
     onShowHideDropdownMenu: () => dispatch({
         type: 'ON_SHOW_HIDE_MENU',
     }),
@@ -30,7 +27,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-function DropDownWithLabel({mandatory, labelText, displayMenu, btnText, onShowHideDropdownMenu, onSelectItem}) {
+function DropDownWithLabel({mandatory, labelText, displayMenu, btnText, wifiNameRequired,
+                               onShowHideDropdownMenu, onSelectItem}) {
 
     const _selectItem = (item) => {
         onSelectItem(item);
@@ -65,7 +63,7 @@ function DropDownWithLabel({mandatory, labelText, displayMenu, btnText, onShowHi
                         </ul>
                         }
                     </div>
-                    <div className='col-2 user-icon'>
+                    <div className='col-2 user-icon svg-border'>
                         <Icon color='red' onClick={() => console.log('fdsgfewrr')}/>
                     </div>
                 </div>

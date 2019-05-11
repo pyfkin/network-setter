@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
     wirelessDnsAuto: state.wireless.wirelessDnsAuto,
 
     securityKey: state.wireless.securityKey,
+    securityKeyRequired: state.wireless.securityKeyRequired,
     enabledWifi: state.wireless.enabledWifi,
     enabledSecurityKey: state.wireless.enabledSecurityKey,
 });
@@ -39,9 +40,8 @@ const mapDispatchToProps = dispatch => ({
 function Wireless({
                       enabledWifi, enabledSecurityKey, wirelessIp, wirelessMask, wirelessGateway, wirelessPreferredDns,
                       wirelessAlternativeDns, wirelessIpAuto, wirelessDnsAuto, securityKey,
-                      onSecKeyChanged, onEnabledWifiChanged, onEnabledSecKeyChanged
-                  })
-{
+                      securityKeyRequired, onSecKeyChanged, onEnabledWifiChanged, onEnabledSecKeyChanged
+                  }) {
     let visiblePage = enabledWifi ? '' : 'disabled';
     let visibleSecKey = enabledSecurityKey ? '' : 'disabled';
     return (
@@ -60,7 +60,7 @@ function Wireless({
                 <div className='col-12'>
                     <div className={`row justify-content-end secKey ${visibleSecKey}`}>
                         <TextInputWithLabel labelText='Security Key:' mandatory={true} name='securityKey'
-                                            value={securityKey} onChange={onSecKeyChanged}/>
+                                            isRequired={securityKeyRequired} value={securityKey} onChange={onSecKeyChanged}/>
                     </div>
                 </div>
 

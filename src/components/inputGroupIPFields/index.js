@@ -11,6 +11,11 @@ const mapStateToProps = state => ({
     wirelessIp: state.wireless.wirelessIp,
     wirelessMask: state.wireless.wirelessMask,
     wirelessGateway: state.wireless.wirelessGateway,
+
+    ethernetIpRequired: state.ethernet.ethernetIpRequired,
+    ethernetMaskRequired: state.ethernet.ethernetMaskRequired,
+    wirelessIpRequired: state.wireless.wirelessIpRequired,
+    wirelessMaskRequired: state.wireless.wirelessMaskRequired,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,7 +37,8 @@ const mapDispatchToProps = dispatch => ({
 
 
 function InputGroupIPFields({ethernetIp, ethernetMask, ethernetGateway, wirelessIp, wirelessMask, wirelessGateway,
-                                type, isDisabled, onInputEthernetIpChanged, onInputWirelessIpChanged}){
+                                type, isDisabled, onInputEthernetIpChanged, onInputWirelessIpChanged,
+                                ethernetIpRequired, ethernetMaskRequired, wirelessIpRequired, wirelessMaskRequired}){
 
     const _onInputChanged = (type, inputName, e) => {
         if (type === 'ethernet') {
@@ -42,15 +48,21 @@ function InputGroupIPFields({ethernetIp, ethernetMask, ethernetGateway, wireless
         }
     };
 
-    let _ip, _mask, _gateway;
+    let _ip, _mask, _gateway,
+        _requiredIp, _requiredMask;
     if (type === 'ethernet') {
         _ip = ethernetIp;
         _mask = ethernetMask;
         _gateway = ethernetGateway;
+        _requiredIp =  ethernetIpRequired;
+        _requiredMask =  ethernetMaskRequired;
+
     } else {
         _ip = wirelessIp;
         _mask = wirelessMask;
         _gateway = wirelessGateway;
+        _requiredIp =  wirelessIpRequired;
+        _requiredMask =  wirelessMaskRequired;
     }
 
     let visible = isDisabled ? '' : 'disabled';
@@ -58,11 +70,11 @@ function InputGroupIPFields({ethernetIp, ethernetMask, ethernetGateway, wireless
     return(
         <div className={`row justify-content-end manual-input-group ${visible}`}>
             <TextInputWithLabel labelText='IP address:' mandatory={true} name={`${type}Ip`} value={_ip}
-                                onChange={_onInputChanged.bind(null, `${type}`, `${type}Ip`)}/>
+                                isRequired={_requiredIp} onChange={_onInputChanged.bind(null, `${type}`, `${type}Ip`)}/>
             <TextInputWithLabel labelText='Subnet Mask:' mandatory={true} name={`${type}Mask`} value={_mask}
-                                onChange={_onInputChanged.bind(null,`${type}`, `${type}Mask`)}/>
+                                isRequired={_requiredMask} onChange={_onInputChanged.bind(null,`${type}`, `${type}Mask`)}/>
             <TextInputWithLabel labelText='Default Gateway:' mandatory={false} name={`${type}Gateway`} value={_gateway}
-                                onChange={_onInputChanged.bind(null,`${type}`, `${type}Gateway`)}/>
+                                isRequired={false} onChange={_onInputChanged.bind(null,`${type}`, `${type}Gateway`)}/>
         </div>
     );
 }
