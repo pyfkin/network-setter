@@ -14,9 +14,14 @@ const mapStateToProps = state => ({
 
     dropStyle: state.common.dropStyle,
     rotateStyle: state.common.rotateStyle,
+
+    pointsList: state.common.pointsList,
 });
 
 const mapDispatchToProps = dispatch => ({
+    onFetchPointsList: () => dispatch({
+        type: 'FETCH_PLAYER_LIST',
+    }),
     onShowHideDropdownMenu: () => dispatch({
         type: 'ON_SHOW_HIDE_MENU',
     }),
@@ -43,29 +48,36 @@ const mapDispatchToProps = dispatch => ({
 
 
 function DropDownWithLabel({
-                               mandatory, labelText, displayMenu, btnText, wifiNameRequired, dropStyle, rotateStyle,
-                               onShowHideDropdownMenu, onSelectItem, MouseLeave, MouseEnter, RotateStart, RotateStop
-                           }) {
+                               mandatory, labelText, displayMenu, btnText, wifiNameRequired, dropStyle, pointsList,
+                               rotateStyle, onFetchPointsList, onShowHideDropdownMenu, onSelectItem, MouseLeave,
+                               MouseEnter, RotateStart, RotateStop
+                           })
+{
 
     let _dropStyle = dropStyle ? 'down' : 'up';
     let _rotate = rotateStyle ? 'rotate-in-center' : '';
 
-    const _selectItem = (item) => {
+    const _selectItem = (item) =>
+    {
         onSelectItem(item);
         MouseLeave();
+    };
+
+    const _onDropStyleChange = () =>
+    {
+        dropStyle ? MouseEnter() : MouseLeave();
         onShowHideDropdownMenu();
     };
 
-    const _onDropStyleChange = () => {
-        dropStyle ? MouseEnter() : MouseLeave();
-    };
-
-    const _onRotate = () => {
+    const _onRotate = () =>
+    {
         RotateStart();
+        onFetchPointsList();
         setTimeout(RotateStop, 600);
     };
 
-    const _sortDevicesByFavouriteAndStrength = (a, b) => {
+    const _sortDevicesByFavouriteAndStrength = (a, b) =>
+    {
         let aFavourite = a.favorite,
             bFavourite = b.favorite;
         if (aFavourite !== b.favorite)
@@ -75,7 +87,11 @@ function DropDownWithLabel({
     };
 
     let _mandatory = mandatory ? '*' : '';
-    let body = mock.sort(_sortDevicesByFavouriteAndStrength).map((item, index) =>
+    /*let body = mock.points.sort(_sortDevicesByFavouriteAndStrength).map((item, index) =>
+        <li key={index} onClick={() => _selectItem(item)}>{item.name}</li>
+    );*/
+
+    let body = pointsList.sort(_sortDevicesByFavouriteAndStrength).map((item, index) =>
         <li key={index} onClick={() => _selectItem(item)}>{item.name}</li>
     );
 
@@ -85,7 +101,7 @@ function DropDownWithLabel({
             <div className='col-6'>
                 <div className='row cover-dropdown'>
                     <div className='dropdown col-9' onClick={_onDropStyleChange}>
-                        <div className={`${_dropStyle} button`} onClick={onShowHideDropdownMenu}>{btnText}</div>
+                        <div className={`${_dropStyle} button`}>{btnText}</div>
                         {
                             displayMenu &&
                             <ul className='wireless-list'>

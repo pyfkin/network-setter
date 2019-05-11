@@ -61,8 +61,11 @@ function wirelessReducer(state = initialState, action) {
                 $merge: {
                     enabledWifi: !state.enabledWifi,
                     btnText: state.enabledWifi ? 'Please select' : state.btnText,
+                    displayMenu: state.displayMenu ? !state.displayMenu : false,
                     selectedItem: state.enabledWifi ? {} : state.selectedItem,
                     wifiNameRequired: state.wifiNameRequired ? !state.wifiNameRequired : false,
+                    wirelessIpAuto: 0,
+                    wirelessDnsAuto: 0,
                 }
             });
         case 'ON_ENABLED_SECURITY_KEY_CHANGED':

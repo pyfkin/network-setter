@@ -4,6 +4,7 @@ import dataService from '../services/dataService'
 
 const initialState = {
     userSettings: dataService.getData() || {},
+    pointsList: [],
     dropStyle: true,
     rotateStyle: false,
 };
@@ -36,6 +37,12 @@ function commonReducer(state = initialState, action) {
             return update(state, {
                 $merge: {
                     rotateStyle: false,
+                }
+            });
+        case 'FETCH_COMPLETED':
+            return update(state, {
+                $merge: {
+                    pointsList: action.payload,
                 }
             });
         case 'FETCH_SAVED_DATA':
