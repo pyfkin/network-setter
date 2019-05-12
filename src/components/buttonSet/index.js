@@ -6,10 +6,6 @@ import Button from '../button';
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
-    onSaveData: () => dispatch({
-        type: 'ON_SAVE_DATA',
-        payload: '',
-    }),
     onCancel: () => dispatch({
         type: 'SET_DEFAULTS',
     }),
@@ -19,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-function ButtonSet({text, btnStyle, onSaveData, onCancel, onReload}) {
+function ButtonSet({text, btnStyle, onCancel, onReload}) {
 
     const _cancel = () => {
         onCancel();

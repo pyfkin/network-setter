@@ -15,7 +15,8 @@ const initialState = {
     ethernetDnsAuto: 0,
 };
 
-function ethernetReducer(state = initialState, action) {
+function ethernetReducer(state = initialState, action)
+{
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
@@ -52,7 +53,12 @@ function ethernetReducer(state = initialState, action) {
                     $merge: {
                         ethernetPreferredDnsRequired: !state.ethernetPreferredDnsRequired,
                     }
-                })}
+                })
+            }
+        case 'ON_UPDATE_ETHERNET_FROM_LOCAL_STORAGE':
+            return update(state, {
+                $merge: action.payload,
+            });
         default:
             return state;
     }

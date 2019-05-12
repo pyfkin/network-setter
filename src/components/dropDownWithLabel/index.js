@@ -1,8 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import mock from '../../db/mock';
 import Icon from './svg-icon';
-import connect from "react-redux/es/connect/connect";
 import './dropDown.css';
 
 
@@ -87,11 +86,9 @@ function DropDownWithLabel({
     };
 
     let _mandatory = mandatory ? '*' : '';
-    /*let body = mock.points.sort(_sortDevicesByFavouriteAndStrength).map((item, index) =>
-        <li key={index} onClick={() => _selectItem(item)}>{item.name}</li>
-    );*/
 
-    let body = pointsList.sort(_sortDevicesByFavouriteAndStrength).map((item, index) =>
+    let _pointsList = pointsList.map(item => item);
+    let body = _pointsList.sort(_sortDevicesByFavouriteAndStrength).map((item, index) =>
         <li key={index} onClick={() => _selectItem(item)}>{item.name}</li>
     );
 

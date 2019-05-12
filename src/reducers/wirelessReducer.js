@@ -24,9 +24,11 @@ const initialState = {
     btnText: 'Please select',
     wifiNameRequired: false,
     selectedItem: {},
+    qwe: ['qwe',  'gda'],
 };
 
-function wirelessReducer(state = initialState, action) {
+function wirelessReducer(state = initialState, action)
+{
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
@@ -104,6 +106,44 @@ function wirelessReducer(state = initialState, action) {
                     }
                 })
             }
+        case 'ON_UPDATE_WIRELESS_FROM_LOCAL_STORAGE':
+            const userSelectedItem = Object.assign({}, action.payload.selectedItem);
+            const newItems = action.payload.selectedItem.security.map(i => i);
+            console.log('arr', newItems);
+            const q = state.qwe.map(i => i);
+            // delete action.payload.selectedItem;
+            console.log(userSelectedItem);
+            return update(state, {
+                qwe: {
+                    // security: {
+                        $unset: [0],
+                    // },
+            }
+
+
+                }
+
+                //     selectedItem: {
+                //         favorite: {
+                //             $set: userSelectedItem.favorite
+                //         },
+                //         name: {
+                //             $set: userSelectedItem.name
+                //         },
+                //         security: {
+                //             $splice: [[newItems, 1]],
+                //         },
+                //         // security: {
+                //         //     $push: userSelectedItem.security
+                //         // },
+                //         strength: {
+                //             $set: userSelectedItem.strength
+                //         },
+                //     }
+                // }
+            );
+
+        // });
         default:
             return state;
     }
