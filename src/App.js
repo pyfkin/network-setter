@@ -50,11 +50,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-function App({onUpdateEthernetFromLocalStorage, onUpdateWirelessFromLocalStorage, ...rest})
+class App extends React.Component
 {
-    const _saveData = (e) =>
+    _saveData = (e) =>
     {
         e.preventDefault();
+        let {...rest} = this.props;
         let isValidated = false;
         if (rest['ethernetIpAuto']) {
             isValidated =
@@ -96,23 +97,29 @@ function App({onUpdateEthernetFromLocalStorage, onUpdateWirelessFromLocalStorage
         }
     };
 
-    let savedData = dataService.getDataFromLocalSrorage();
-    if (Object.keys(savedData).length) {
-        console.log('sadf');
-        onUpdateEthernetFromLocalStorage(savedData.ethernet);
-        onUpdateWirelessFromLocalStorage(savedData.wireless);
+    componentWillMount()
+    {
+        const {onUpdateEthernetFromLocalStorage, onUpdateWirelessFromLocalStorage} = this.props;
+        const savedData = dataService.getDataFromLocalSrorage();
+        if (Object.keys(savedData).length) {
+            console.log('sadf');
+            onUpdateEthernetFromLocalStorage(savedData.ethernet);
+            onUpdateWirelessFromLocalStorage(savedData.wireless);
+        }
+    };
+
+    render()
+    {
+        return (
+            <form className='container' onSubmit={this._saveData}>
+                <div className='row main'>
+                    <Ethernet/>
+                    <Wireless/>
+                </div>
+                <ButtonSet/>
+            </form>
+        );
     }
-
-
-    return (
-        <form className='container' onSubmit={_saveData}>
-            <div className='row main'>
-                <Ethernet/>
-                <Wireless/>
-            </div>
-            <ButtonSet/>
-        </form>
-    );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
