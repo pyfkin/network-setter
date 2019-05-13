@@ -15,8 +15,7 @@ const initialState = {
     ethernetDnsAuto: 0,
 };
 
-function ethernetReducer(state = initialState, action)
-{
+function ethernetReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
@@ -32,26 +31,34 @@ function ethernetReducer(state = initialState, action)
             return update(state, {
                 $merge: {
                     ethernetIpAuto: action.payload,
+                    ethernetIp: '',
+                    // ethernetIpRequired: !state.ethernetIpRequired,
+                    ethernetMask: '',
+                    // ethernetMaskRequired: !state.ethernetMaskRequired,
+                    ethernetGateway: '',
                 }
             });
         case 'ETHERNET_DNS_RADIO_VALUE_CHANGED':
             return update(state, {
                 $merge: {
                     ethernetDnsAuto: action.payload,
+                    ethernetPreferredDns: '',
+                    // ethernetPreferredDnsRequired: !state.ethernetPreferredDnsRequired,
+                    ethernetAlternativeDns: '',
                 }
             });
         case 'REQUIRED_ETHERNET_CHANGED':
             if (action.payload.key === 'Ip') {
                 return update(state, {
                     $merge: {
-                        ethernetIpRequired: !state.ethernetIpRequired,
-                        ethernetMaskRequired: !state.ethernetMaskRequired,
+                        ethernetIpRequired: !!state.ethernetIpAuto,
+                        ethernetMaskRequired: !!state.ethernetIpAuto,
                     }
                 })
             } else {
                 return update(state, {
                     $merge: {
-                        ethernetPreferredDnsRequired: !state.ethernetPreferredDnsRequired,
+                        ethernetPreferredDnsRequired: !!state.ethernetDnsAuto,
                     }
                 })
             }

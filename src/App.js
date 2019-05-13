@@ -56,34 +56,32 @@ class App extends React.Component
     {
         e.preventDefault();
         let {...rest} = this.props;
-        let isValidated = false;
+        let isValidated = true;
         if (rest['ethernetIpAuto']) {
             isValidated =
                 dataService.validateIPaddress(rest['ethernetIp'], 'Ethernet Ip address') &&
                 dataService.validateIPaddress(rest['ethernetMask'], 'Ethernet Subnet Mask') &&
                 dataService.validateIPaddress(rest['ethernetGateway'], 'Ethernet Default Gateway');
-
         }
-        if (rest['ethernetDnsAuto']) {
+        if (isValidated && rest['ethernetDnsAuto']) {
             isValidated =
                 dataService.validateIPaddress(rest['ethernetPreferredDns'], 'Ethernet Preferred DNS server') &&
                 dataService.validateIPaddress(rest['ethernetAlternativeDns'], 'Ethernet Alternative DNS server');
         }
-
-        if (rest['enabledWifi']) {
-            if (rest['btnText'] !== 'Please select' && Object.keys(rest['selectedItem']).length !== 0) {
+        if (isValidated && rest['enabledWifi']) {
+            if (isValidated && rest['btnText'] !== 'Please select' && Object.keys(rest['selectedItem']).length !== 0) {
                 isValidated = true;
             } else {
                 alert(`You didn't choose Network Name!`);
                 return false;
             }
-            if (rest['wirelessIpAuto']) {
+            if (isValidated && rest['wirelessIpAuto']) {
                 isValidated =
                     dataService.validateIPaddress(rest['wirelessIp'], 'Wireless Ip address') &&
                     dataService.validateIPaddress(rest['wirelessMask'], 'Wireless Subnet Mask') &&
                     dataService.validateIPaddress(rest['wirelessGateway'], 'Wireless Default Gateway');
             }
-            if (rest['wirelessDnsAuto']) {
+            if (isValidated && rest['wirelessDnsAuto']) {
                 isValidated =
                     dataService.validateIPaddress(rest['wirelessPreferredDns'], 'Wireless Preferred DNS server') &&
                     dataService.validateIPaddress(rest['wirelessAlternativeDns'], 'Wireless Alternative DNS server');
@@ -93,7 +91,7 @@ class App extends React.Component
             dataService.setDataToLocalStorage(rest);
             alert(`New data saved successfully!`);
         } else {
-            alert(`No updates!`);
+            alert(`Update canceled!`);
         }
     };
 

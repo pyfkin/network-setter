@@ -26,8 +26,7 @@ const initialState = {
     selectedItem: {},
 };
 
-function wirelessReducer(state = initialState, action)
-{
+function wirelessReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
@@ -43,12 +42,20 @@ function wirelessReducer(state = initialState, action)
             return update(state, {
                 $merge: {
                     wirelessIpAuto: action.payload,
+                    wirelessIp: '',
+                    // wirelessIpRequired: !state.wirelessIpRequired,
+                    wirelessMask: '',
+                    // wirelessMaskRequired: !state.wirelessMaskRequired,
+                    wirelessGateway: '',
                 }
             });
         case 'WIRELESS_DNS_RADIO_VALUE_CHANGED':
             return update(state, {
                 $merge: {
                     wirelessDnsAuto: action.payload,
+                    wirelessPreferredDns: '',
+                    // wirelessPreferredDnsRequired: !state.wirelessPreferredDnsRequired,
+                    wirelessAlternativeDns: '',
                 }
             });
         case 'ON_SECURITY_KEY_CHANGED':
@@ -58,6 +65,11 @@ function wirelessReducer(state = initialState, action)
                 }
             });
         case 'ON_ENABLED_WIFI_CHANGED':
+            if (state.enabledWifi) {
+                return update(state, {
+                    $merge: initialState
+                })
+            }
             return update(state, {
                 $merge: {
                     enabledWifi: !state.enabledWifi,
@@ -73,7 +85,8 @@ function wirelessReducer(state = initialState, action)
             return update(state, {
                 $merge: {
                     enabledSecurityKey: !state.enabledSecurityKey,
-                    securityKeyRequired: !state.securityKeyRequired,
+                    securityKeyRequired: !state.enabledSecurityKey,
+                    securityKey: '',
                 }
             });
         case 'ON_SELECT_ITEM':
@@ -94,20 +107,20 @@ function wirelessReducer(state = initialState, action)
             if (action.payload.key === 'Ip') {
                 return update(state, {
                     $merge: {
-                        wirelessIpRequired: !state.wirelessIpRequired,
-                        wirelessMaskRequired: !state.wirelessMaskRequired,
+                        wirelessIpRequired: !!state.wirelessIpAuto,
+                        wirelessMaskRequired: !!state.wirelessIpAuto,
                     }
                 })
             } else {
                 return update(state, {
                     $merge: {
-                        wirelessPreferredDnsRequired: !state.wirelessPreferredDnsRequired,
+                        wirelessPreferredDnsRequired: !!state.wirelessDnsAuto,
                     }
                 })
             }
         case 'ON_UPDATE_WIRELESS_FROM_LOCAL_STORAGE':
             return update(state, {
-                $merge: action.payload
+                    $merge: action.payload
                 }
             );
         default:
